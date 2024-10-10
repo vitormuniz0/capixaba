@@ -1,11 +1,12 @@
 import React from 'react'
+import { Button } from './style';
 
-const Button = ({children}) => {
+const MyButton = ({children}) => {
   return (
     <Button>
-        {children}
+      {children}
     </Button>
   )
 }
 
-export default Button;
+export default MyButton;
