@@ -10,6 +10,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
 
+
   &::before {
     content: "";
     position: absolute;
@@ -22,7 +23,8 @@ export const Container = styled.div`
     background-size: cover;
     filter: blur(6px);
     overflow: hidden;
-    z-index: -1;
+    z-index: -1;  
+    border: none;
   }
 `;
 
@@ -33,32 +35,55 @@ export const Content = styled.div`
   justify-content: space-between;
   height: 80%;
   width: 100%;
+  margin: 0;
+  padding: 0;
   background-color: transparent;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex-direction: row; /* Coloca lado a lado em telas médias ou maiores */
+  }
+
 `;
 export const LogoContent = styled.div`
+
   display: flex;
-  width: 100%;
-  height: 80%;
+  width: 100%;  /* Ocupa 100% em telas pequenas */
+  height: auto;  /* Ajusta a altura de acordo com o conteúdo */
   align-items: center;
   justify-content: center;
   margin: 0;
+  padding: 0;
   flex-wrap: wrap;
+
+  @media (min-width: 768px) {
+    width: 50%;  /* Ocupa 50% em telas maiores */
+    height: 80%;
+  }
+
+
 `;
 export const ButtonContent = styled.div`
+
   display: flex;
+  flex-direction: column; /* Mantém os botões em coluna */
   flex-wrap: wrap;
-  height: 80%;
-  flex-direction: column;
+  height: auto;  /* Ajusta a altura automaticamente */
   gap: 40px;
-  width: 100%;
+  width: 100%;  /* Ocupa 100% em telas pequenas */
   align-items: center;
   justify-content: center;
-  margin: 0;
+
+
+  @media (min-width: 768px) {
+    width: 50%;  /* Ocupa 50% em telas médias ou maiores */
+    height: 80%;  /* Ajusta a altura em telas maiores */
+  }
 `;
 
 export const LogoImage = styled.img`
     width: 60%;
-    height: 80%;
+    height: 100%;
 `
 export const SocialContent = styled.div`
     align-items: center;
@@ -67,6 +92,11 @@ export const SocialContent = styled.div`
     background-color: transparent;
     color: white;
     text-align: right;
+
+    @media (max-width: 768px) {
+    text-align: center;
+  }
+
 `
 
 
