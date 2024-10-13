@@ -8,14 +8,16 @@ export const Container = styled.div`
 
 export const Header = styled.header`
   width: 100%;
-  height: 30%;
+  height: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
+  flex-direction: column;
+  margin: 0;
 
   &::before {
-    height: 30%;
+    height: 50%;
     content: "";
     position: absolute;
     top: 0;
@@ -32,3 +34,32 @@ export const Header = styled.header`
   }
 
 `;
+
+export const ImageHeader = styled.img`
+  width: 14%;
+  height: 50%;
+  border-radius: 50%;
+  display: flex;
+
+
+  @media (max-width: 950px) {
+    height: 50%;
+    width: 40%;
+  }
+
+  @media (max-width: 450px) {
+    height: 30%;
+  }
+
+`;
+export const TextLogo = styled.h1`
+  justify-content: center;
+  color: white;
+  margin-top: 2px;
+  align-items: center;
+`
+export const Location = styled.p`
+  justify-content: center;
+  color: white;
+
+`
