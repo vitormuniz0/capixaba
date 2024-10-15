@@ -11,7 +11,7 @@ const Home = () => {
           <LogoImage src = {logo} alt='Logo'/>
         </LogoContent>
         <ButtonContent>
-          <MyButton>Delivery Capixaba</MyButton>
+          <MyButton to='/content'>Delivery Capixaba</MyButton>
           <MyButton>Ifood Capixaba</MyButton>
           <MyButton>Nossa Localização</MyButton>
           <MyButton>Tire Suas Duvidas Aqui</MyButton>

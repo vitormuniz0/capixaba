@@ -75,7 +75,7 @@ export const ButtonContent = styled.div`
 
 export const LogoImage = styled.img`
   width: 60%;
-  height: 100%;
+  height: 80%;
 `;
 export const SocialContent = styled.div`
   align-items: center;

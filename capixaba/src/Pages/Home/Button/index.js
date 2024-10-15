@@ -1,12 +1,21 @@
-import React from 'react'
-import { Button } from './style';
+import React from "react";
+import { Button } from "./style";
+import { useNavigate } from "react-router-dom";
 
-const MyButton = ({children}) => {
+const MyButton = ({ children, to }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (to) {
+      navigate(to);
+    }
+  };
+
   return (
-    <Button>
+    <Button onClick={handleClick}>
       {children}
     </Button>
-  )
-}
+  ) 
+};
 
 export default MyButton;
