@@ -3,7 +3,7 @@ import { Hours } from "./style";
 import classNames from "classnames";
 
 const MyHours = () => {
-' '
+
   const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
   const [result, setResult] = useState('');
 
@@ -30,15 +30,15 @@ const MyHours = () => {
 
   const closedOrOpen = (currentHour) =>{
     if(currentHour >= 7 && currentHour < 22){
-        setResult('Aberto')
+        setResult('Aberto até as 22:00 Horas')
     } else{
-        setResult('Fechado')
+        setResult('Fechado No Momento')
     }
   }
 
   return (
     <Hours className={buttonClass}>
-      <h5>07:00 - 22:00</h5>
+      <h5>{result}</h5>
     </Hours>
   );
 };

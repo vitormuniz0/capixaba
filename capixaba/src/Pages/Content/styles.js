@@ -4,20 +4,23 @@ export const Container = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
+  flex-direction: column;
 `;
 
 export const Header = styled.header`
   width: 100%;
-  height: 50%;
+  height: 30%;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
   flex-direction: column;
   margin: 0;
+  z-index: 1;
+
 
   &::before {
-    height: 50%;
+    height: 30%;
     content: "";
     position: absolute;
     top: 0;
@@ -52,14 +55,22 @@ export const ImageHeader = styled.img`
   }
 
 `;
-export const TextLogo = styled.h1`
-  justify-content: center;
-  color: white;
-  margin-top: 2px;
-  align-items: center;
-`
+
+
 export const Location = styled.p`
   justify-content: center;
   color: white;
-
+  margin-top: 8px;
+  font-size: 18px;
+`
+export const ContentProducts = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  height: 50%;
+  background-color: black;
+  z-index: 0;
+  padding-top: 20px; /* Adiciona um espaçamento para que os produtos não fiquem sobre o Header */
+  margin: o;
 `

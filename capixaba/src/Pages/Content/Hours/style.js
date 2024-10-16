@@ -4,15 +4,18 @@ export const Hours = styled.div`
 
     text-align: center;
     color: white;
+    
     justify-content: center;
-    padding: 0.2%;
 
+    h5{
+        font-size: 19px;
+    }
 
     &.oppen{
-        background-color: green;
+        color: green;
     }
 
     &.closed{
-        background-color: red;
+        color: red;
     }
 `
