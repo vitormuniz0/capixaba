@@ -4,12 +4,11 @@ import { NavBarContainer, NavItem } from './style';
 const NavBar = () => {
   return (
     <NavBarContainer>
-        <NavItem>Hamburgues</NavItem>
+        <NavItem>Salgados</NavItem>
         <NavItem>Doces</NavItem>
+        <NavItem>Pães</NavItem>
         <NavItem>Bebidas</NavItem>
-        <NavItem>aaa</NavItem>
-        <NavItem>aaa</NavItem>
-        <NavItem>aaa</NavItem>
+        <NavItem>Promoção</NavItem>
     </NavBarContainer>
   )
 }

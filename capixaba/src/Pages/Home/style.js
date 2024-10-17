@@ -53,7 +53,7 @@ export const LogoContent = styled.div`
   flex-wrap: wrap;
 
   @media (min-width: 768px) {
-    width: 50%; /* Ocupa 50% em telas maiores */
+    width: 60%; /* Ocupa 50% em telas maiores */
     height: 80%;
   }
 `;
@@ -67,6 +67,8 @@ export const ButtonContent = styled.div`
   align-items: center;
   justify-content: center;
 
+  
+
   @media (min-width: 768px) {
     width: 50%; /* Ocupa 50% em telas médias ou maiores */
     height: 80%; /* Ajusta a altura em telas maiores */
@@ -74,8 +76,8 @@ export const ButtonContent = styled.div`
 `;
 
 export const LogoImage = styled.img`
-  width: 60%;
-  height: 80%;
+  width: 50%;
+  height: 70%;
 `;
 export const SocialContent = styled.div`
   align-items: center;

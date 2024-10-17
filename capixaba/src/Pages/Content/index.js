@@ -1,8 +1,9 @@
 import React from 'react'
-import { Container, ContentProducts, Header, ImageHeader, Location, TextLogo } from './styles';
+import { BodyContent, Container, Header, ImageHeader, Location} from './styles';
 import ImgPadaria from '../../Assets/image/logoCapixaba.jpg'
 import MyHours from './Hours';
 import NavBar from '../../Components/MenuScroll';
+import CardProducts from '../../Components/CardProducts';
 
 const Content = () => {
   return (
@@ -13,6 +14,17 @@ const Content = () => {
         <MyHours/>
       </Header>
       <NavBar/>
+    <BodyContent>
+      <CardProducts/>
+      <CardProducts/>
+      <CardProducts/>
+      <CardProducts/>
+      <CardProducts/>
+      <CardProducts/>
+      <CardProducts/>
+
+      
+    </BodyContent>
     </Container>
   )
 }
