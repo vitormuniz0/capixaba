@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 export const Button = styled.button`
     display: flex;
-    background-color: 	#A0522D;
-    font-size: 19px;
+    background-color: 	#623c16;
+    font-size: 23px;
     color: white;
-    width: 80%;
+    width: 75%;
     height: 9%;
     align-items: center;
     justify-content: center;
@@ -15,7 +15,7 @@ export const Button = styled.button`
     transition: background-color 0.3s;
 
     &:hover{
-        background-color: black;
+        background-color: #714b25;
     }
 
 `

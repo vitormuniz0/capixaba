@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/esm/Button';
 import CardText from 'react-bootstrap/esm/CardText';
+import CardTitle from 'react-bootstrap/esm/CardTitle';
 
 
 export const ContentProduct = styled(Card)`
@@ -11,7 +12,15 @@ export const ContentProduct = styled(Card)`
     text-align: center;
     border: none;
     justify-content: space-between;
-    margin-top: 6px;
+    margin-top: 20px;
+    
+    @media(max-width: 990px) {
+        width: 50%;
+    }
+
+    @media(max-width: 680px) {
+        width: 100%;
+    }
 
 `
 
@@ -19,21 +28,30 @@ export const ImgProduct = styled(CardImg)`
     width: 50%;
     height: 60%;
 
+    
+
 `
 export const  BtnCar = styled(Button)`
     display: flex;
     align-items: center;
+    justify-content: center;
     color: white;
     margin: auto;
     border: none;
-    background-color: brown;
+    font-size: 25px;
+    background-color: #623c16;
     cursor: pointer;
     transition: background-color 0.3s;
 
-    &:focus {
-        outline: none; /* Remove o contorno ao focar */
+    &:hover {
+        background-color: #714b25;
     }
 `
+export const TitleProduct = styled(CardTitle)`
+    font-weight: bold;
+`
+
+
 export const TextCard = styled(CardText)`
     
 `

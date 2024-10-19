@@ -44,15 +44,28 @@ export const ImageHeader = styled.img`
 export const Location = styled.p`
   justify-content: center;
   color: white;
+  font-weight: bold;
   margin-top: 8px;
   font-size: 18px;
+  font-family: "Lucida Console", "Courier New", monospace;
 `;
 
 export const BodyContent = styled.div`
+  width: 100%;
+  align-items: center;
+  height: auto;
+  flex-wrap: wrap;
+  display: flex;
+`;
+
+export const Section = styled.div`
+  width: 100%;
+  border-bottom: solid 3px silver;
+  height: auto;
   width: 100%;
   align-items: center;
   justify-content: center;
   height: auto;
   flex-wrap: wrap;
   display: flex;
-`;
+`

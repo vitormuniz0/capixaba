@@ -82,7 +82,7 @@ export const LogoImage = styled.img`
 export const SocialContent = styled.div`
   align-items: center;
   width: 80%;
-  font-size: 25px;
+  font-size: 30px;
   background-color: transparent;
   color: white;
   text-align: right;
@@ -93,14 +93,14 @@ export const SocialContent = styled.div`
 `;
 
 export const Instagram = styled(FaInstagram)`
-  margin-left: 20px;
+  margin-left: 30px;
   cursor: pointer;
 `;
 export const WhatsApp = styled(FaWhatsapp)`
-  margin-left: 20px;
+  margin-left: 30px;
   cursor: pointer;
 `;
 export const Tell = styled(BsFillTelephoneFill)`
-  margin-left: 20px;
+  margin-left: 30px;
   cursor: pointer;
 `;

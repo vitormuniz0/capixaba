@@ -25,6 +25,8 @@ export const NavItem = styled.a`
     color: black;
     min-width: 25%;
     text-align: center;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-weight: bold;
     text-decoration: none;
     border-left: 1px solid silver;
     font-size: 20px;
