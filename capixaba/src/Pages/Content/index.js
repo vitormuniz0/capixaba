@@ -16,6 +16,8 @@ import Footer from "../../Components/Footer";
 const Content = () => {
   const sectionSalgados = useRef(null);
   const sectionDoces = useRef(null);
+  const sectionPaes = useRef(null);
+  const sectionBebidas = useRef(null);
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
@@ -25,7 +27,9 @@ const Content = () => {
           setActiveSection(entry.target.id); // Define a seção ativa
         }
       });
-    });
+    },
+    {threshold: 0.6} // Só considera a seção ativa se mais de 60% dela estiver visível
+  );
 
     // Observa as seções
     if (sectionSalgados.current) {
@@ -33,6 +37,14 @@ const Content = () => {
     }
     if (sectionDoces.current) {
       observer.observe(sectionDoces.current);
+    }
+
+    if (sectionPaes.current) {
+      observer.observe(sectionPaes.current);
+    }
+
+    if (sectionBebidas.current) {
+      observer.observe(sectionBebidas.current);
     }
 
     return () => {
@@ -55,6 +67,12 @@ const Content = () => {
         scrollToSectionDoces={() =>
           sectionDoces.current.scrollIntoView({ behavior: "smooth" })
         }
+        scrollToSectionPaes={() =>
+          sectionPaes.current.scrollIntoView({ behavior: "smooth" })
+        }
+        scrollToSectionBebidas={() =>
+          sectionBebidas.current.scrollIntoView({ behavior: "smooth" })
+        }
         activeSection={activeSection}
       />
 
@@ -69,6 +87,22 @@ const Content = () => {
         </Section>
 
         <Section ref={sectionDoces} id="doces">
+          <CardProducts />
+          <CardProducts />
+          <CardProducts />
+          <CardProducts />
+          <CardProducts />
+          <CardProducts />
+        </Section>
+        <Section ref={sectionPaes} id="paes">
+          <CardProducts />
+          <CardProducts />
+          <CardProducts />
+          <CardProducts />
+          <CardProducts />
+          <CardProducts />
+        </Section>
+        <Section ref={sectionBebidas} id="bebidas">
           <CardProducts />
           <CardProducts />
           <CardProducts />
