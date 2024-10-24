@@ -56,6 +56,7 @@ export const BodyContent = styled.div`
   height: auto;
   flex-wrap: wrap;
   display: flex;
+  margin-bottom: 40px;
 `;
 
 export const Section = styled.div`

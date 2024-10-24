@@ -2,7 +2,6 @@ import CardImg from 'react-bootstrap/esm/CardImg';
 import styled from 'styled-components';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/esm/Button';
-import CardText from 'react-bootstrap/esm/CardText';
 import CardTitle from 'react-bootstrap/esm/CardTitle';
 
 
@@ -12,6 +11,7 @@ export const ContentProduct = styled(Card)`
     text-align: center;
     border: none;
     justify-content: space-between;
+    font-family: "Lucida Console", "Courier New", monospace;
     margin-top: 20px;
     
     @media(max-width: 990px) {
@@ -50,10 +50,10 @@ export const  BtnCar = styled(Button)`
 export const TitleProduct = styled(CardTitle)`
     font-weight: bold;
 `
-
-
-export const TextCard = styled(CardText)`
-    
+export const PriceProduct = styled.h3`
+    font-size: 20px ;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-weight: bold;
 `
 
 

@@ -3,7 +3,7 @@ import { ContainerFooter, TextFooter } from './style';
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import CustomModal from '../Modal';
 
-const Footer = () => {
+const Footer = ({cart}) => {
 
   const [showModal , setShowModal] = useState(false);
 
@@ -19,7 +19,7 @@ const Footer = () => {
   return (
     <ContainerFooter>
         <TextFooter onClick={handleShow}>Minhas Compras <AiOutlineShoppingCart/></TextFooter>
-        <CustomModal show={showModal} handleClose={handleClose}/>
+        <CustomModal show={showModal} handleClose={handleClose} cart={cart}/>
     </ContainerFooter>
   )
 }
