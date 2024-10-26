@@ -148,6 +148,10 @@ const Content = () => {
     setCart((prevCart) => [...prevCart, products]); // Adicionando produto ao carrinho
   };
 
+   // Função para remover do carrinho
+   const removeFromCart = (productId) => {
+    setCart((prevCart) => prevCart.filter(product => product.id !== productId));
+  };
 
   return (
     <Container>
@@ -187,7 +191,7 @@ const Content = () => {
           <CardProducts />
         </Section> */}
       </BodyContent>
-      <Footer cart={cart}/>
+      <Footer cart={cart} removeFromCart={removeFromCart}/>
     </Container>
   );
 };
