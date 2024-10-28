@@ -1,4 +1,3 @@
-import { Button } from "react-bootstrap";
 import {
   ButtonRemove,
   Buttons,
@@ -11,6 +10,7 @@ import {
   SubContainer,
 } from "./style";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { BsFillTrash3Fill } from "react-icons/bs";
 import { useState } from "react";
 
 const CustomModal = ({ show, handleClose, cart, removeFromCart }) => {
@@ -44,17 +44,16 @@ const CustomModal = ({ show, handleClose, cart, removeFromCart }) => {
               </SubContainer>
               <ContainerButton>
                 <ButtonRemove
-                  variant="danger"
                   onClick={() => removeFromCart(product.id)}
                 >
-                  Remover
+                 <BsFillTrash3Fill/>
                 </ButtonRemove>
               </ContainerButton>
             </ContentCar>
           ))
         )}
         <h3>Total: R$ {totalPrice},00</h3>
-        <ContainerInput>
+        <ContainerInput>        
           <RadioInput
             type="radio"
             id="retirada"

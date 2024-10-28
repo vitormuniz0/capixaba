@@ -20,28 +20,37 @@ export const ModalCar = styled(Modal)`
     width: 100%;
     height: 100%;
     margin: 0;
+    display: flex;
+    
   }
 
   .modal-title{
     font-size: 35px;
     font-family: "Lucida Console", "Courier New", monospace;
     font-weight: bold;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
     
     @media (max-width: 475px) {  
       font-size: 25px;
     }
-
   }
 
   .modal-body{
     font-size: 20px;
-
     @media(max-width: 875px ){
     font-size: 17px;
   }
   }
   .modal-header {
     border-bottom: none; /* Remove a borda inferior */
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    width: 100% ;
+    text-align: center;
+    position: relative;
   }
 
   .modal-footer {
@@ -62,12 +71,13 @@ export const ContentCar = styled.div`
 `
 export const ContainerInput = styled.div`
   display: flex;
-  flex-direction: column;
-  width: 30%;
+  flex-direction: row;
+  width: 100%;
   margin: 20px 0;
   justify-content: center;
   text-align: center;
-
+  align-items:center;
+  gap: 20px; 
 `
 
 export const RadioInput = styled.input`
@@ -82,9 +92,10 @@ export const RadioInput = styled.input`
 
 export const RadioLabel = styled.label`
   padding: 10px 15px;
+  width: 25%;
+  margin-top: 5px;
   border: 1px solid #007bff; /* Borda do botão */
   border-radius: 5px; /* Borda arredondada */
-  margin-bottom: 10px; /* Espaço entre os botões */
   cursor: pointer; /* Cursor de pointer ao passar o mouse */
   transition: background-color 0.3s;
   font-size: 15px;
@@ -95,44 +106,41 @@ export const RadioLabel = styled.label`
   }
 
   @media(max-width: 455px ){
-    font-size: 12px
+    font-size: 11px;
+    width:25%;
   }
 `;
 
 export const Buttons = styled(Button)`
-  width: 20%;
+  width: 25%;
 
   @media(max-width: 510px ){
-    width: 25%
+    width: 30%
   }
   
   @media(max-width: 390px ){
     font-size: 9px;
   }
 `
-export const ButtonRemove = styled(Button)`
+export const ButtonRemove = styled.p`
   display: block;
   width: 100%;
   margin: auto;
+  cursor: pointer;
+  font-size: 25px;
 
-  
-
-  @media(max-width: 400px ){
-    font-size: 9px ;
+  &:hover{
+    color: red;
   }
 `
 
 export const ContainerButton = styled.div`
   display: flex;
-  width: 20%;
-  align-items: center;
+  width: 10%;
+  align-items: right;
 
   justify-content: center; 
   margin: auto;
-  
-  @media(max-width: 545px ){
-    width: 32%;
-  }
 `
 export const SubContainer = styled.div`
   display: flex;
