@@ -2,11 +2,13 @@ import React from "react";
 import { Button } from "./style";
 import { useNavigate } from "react-router-dom";
 
-const MyButton = ({ children, to }) => {
+const MyButton = ({ children, to, onClick }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    if (to) {
+    if(onClick){
+      onClick();
+    }else if(to){
       navigate(to);
     }
   };

@@ -163,10 +163,10 @@ export const ContainerEndereco = styled(InputGroup)`
   display: flex;
   justify-content: center;
   gap: 20px;
-`
+`;
 
 export const PedidoInput = styled.input`
- /* Estilização do input de endereco do carrinho */
+  /* Estilização do input de endereco do carrinho */
   padding: 10px;
   width: 40%;
   border: 1px solid #ccc;
@@ -182,21 +182,32 @@ export const PedidoInput = styled.input`
 
 export const MessageTaxa = styled.p`
   color: red;
-`
+`;
 
 export const InfoPedido = styled.p`
   font-weight: bold;
   font-family: "Lucida Console", "Courier New", monospace;
-`
+`;
 
 export const ContentInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
   margin-bottom: 10px;
-`
+`;
 export const TitleProdutos = styled.h3`
   color: red;
   font-weight: bold;
   font-family: "Lucida Console", "Courier New", monospace;
-`
+`;
+export const ButtonConfirm = styled(Button)`
+  width: 25%;
+
+  @media (max-width: 510px) {
+    width: 40%;
+  }
+
+  @media (max-width: 390px) {
+    font-size: 9px;
+  }
+`;
