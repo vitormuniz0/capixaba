@@ -1,6 +1,5 @@
 import CardBody from "react-bootstrap/esm/CardBody";
 import CardText from "react-bootstrap/esm/CardText";
-import Img from "../../Assets/image/hamburguer.jpg";
 import { BtnCar, ContentProduct, ImgProduct, PriceProduct, TitleProduct } from "./style";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useState } from "react";
