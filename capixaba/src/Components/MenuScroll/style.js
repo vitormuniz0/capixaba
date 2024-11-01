@@ -20,19 +20,27 @@ export const NavBarContainer = styled.div`
     }
 `
 export const NavItem = styled.a`
-    display: inline-block;
-    padding: 8px;
-    color: black;
-    min-width: 25%;
-    text-align: center;
-    font-family: "Lucida Console", "Courier New", monospace;
-    font-weight: bold;
-    text-decoration: none;
-    border-left: 1px solid silver;
-    font-size: 20px;
-    background-color: white;
-    justify-content: space-between;
-    &:hover {
+  display: inline-block;
+  padding: 8px;
+  color: black;
+  min-width: 25%;
+  text-align: center;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-weight: bold;
+  text-decoration: none;
+  border-left: 1px solid silver;
+  font-size: 20px;
+  background-color: ${({ isActive }) => (isActive ? 'silver' : 'white')};
+  justify-content: space-between;
+  
+  &:hover {
     background-color: silver;
   }
-`
+
+  // Estilo para telas menores
+  @media (max-width: 680px) {
+    font-size: 16px;
+    padding: 10px 0;
+    background-color: ${({ isActive }) => (isActive ? 'silver' : 'white')};
+  }
+`;

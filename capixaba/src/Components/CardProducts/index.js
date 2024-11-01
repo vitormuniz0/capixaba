@@ -21,7 +21,7 @@ const CardProducts = ({ products = [], addToCart }) => {
     <>
       {products.map((product) => (
         <ContentProduct key={product.id}>
-          <ImgProduct src={Img} alt={product.nameProduct} />
+           <ImgProduct src={product.image} alt={product.nameProduct} />
           <CardBody>
             <TitleProduct>{product.nameProduct}</TitleProduct>
             <CardText>{product.desc}</CardText>
