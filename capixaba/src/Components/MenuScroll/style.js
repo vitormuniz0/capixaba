@@ -7,11 +7,11 @@ export const NavBarContainer = styled.div`
     white-space: nowrap;
     position: sticky;
     top: 0;
-    background-color: silver;
-    margin-bottom: 3px;
+    background-color: #714b25;
+    margin-bottom: 2px;
     border-left: 3px solid silver;
     z-index: 1000;
-    padding:  6px 0px;
+    padding:  3px 0px;
     justify-content: center;  
     -webkit-overflow-scrolling: touch; /* Suaviza a rolagem em dispositivos móveis */
     scrollbar-width: none; /* Para esconder a barra de rolagem no Firefox */
@@ -21,7 +21,7 @@ export const NavBarContainer = styled.div`
 `
 export const NavItem = styled.a`
   display: inline-block;
-  padding: 8px;
+  padding: 5px;
   color: black;
   min-width: 25%;
   text-align: center;

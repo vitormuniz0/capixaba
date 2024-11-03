@@ -26,8 +26,8 @@ export const Header = styled.header`
 `;
 
 export const ImageHeader = styled.img`
-  width: 14%;
-  height: 50%;
+  width: 10%;
+  height: 40%;
   border-radius: 50%;
   display: flex;
 
@@ -46,7 +46,7 @@ export const Location = styled.p`
   color: white;
   font-weight: bold;
   margin-top: 8px;
-  font-size: 18px;
+  font-size: 13px;
   font-family: "Lucida Console", "Courier New", monospace;
 `;
 
@@ -63,7 +63,6 @@ export const Section = styled.div`
   width: 100%;
   border-bottom: solid 3px silver;
   height: auto;
-  width: 100%;
   align-items: center;
   justify-content: center;
   height: auto;

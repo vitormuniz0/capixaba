@@ -53,7 +53,7 @@ export const LogoContent = styled.div`
   flex-wrap: wrap;
 
   @media (min-width: 768px) {
-    width: 60%; /* Ocupa 50% em telas maiores */
+    width: 50%; /* Ocupa 50% em telas maiores */
     height: 80%;
   }
 `;
@@ -62,7 +62,7 @@ export const ButtonContent = styled.div`
   flex-direction: column; /* Mantém os botões em coluna */
   flex-wrap: wrap;
   height: auto; /* Ajusta a altura automaticamente */
-  gap: 40px;
+  gap: 50px;
   width: 100%; /* Ocupa 100% em telas pequenas */
   align-items: center;
   justify-content: center;
@@ -70,14 +70,14 @@ export const ButtonContent = styled.div`
   
 
   @media (min-width: 768px) {
-    width: 50%; /* Ocupa 50% em telas médias ou maiores */
+    width: 45%; /* Ocupa 50% em telas médias ou maiores */
     height: 80%; /* Ajusta a altura em telas maiores */
   }
 `;
 
 export const LogoImage = styled.img`
   width: 50%;
-  height: 70%;
+  height: 60%;
 `;
 export const SocialContent = styled.div`
   align-items: center;

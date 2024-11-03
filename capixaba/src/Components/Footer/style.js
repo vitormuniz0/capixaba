@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const ContainerFooter = styled.footer`
     width: 100%;
     display: flex;
-    height: 5%;
+    height: 4%;
     position: fixed;
     text-align: center;
     flex-direction: column;
@@ -15,7 +15,7 @@ export const ContainerFooter = styled.footer`
 `
 
 export const TextFooter = styled.p`
-    font-size: 25px;
+    font-size: 20px;
     font-family: "Lucida Console", "Courier New", monospace;
     padding-top: 10px;
     cursor: pointer;

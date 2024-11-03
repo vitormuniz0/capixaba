@@ -3,18 +3,18 @@ import styled from 'styled-components';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/esm/Button';
 import CardTitle from 'react-bootstrap/esm/CardTitle';
+import { CardBody } from 'react-bootstrap';
 
 
 export const ContentProduct = styled(Card)`
-  width: 32%;
+  width: 33.3%;
   height: 400px; /* Altura fixa para todos os containers */
   align-items: center;
+  border-top: none;
+  padding: 10px 0;
   text-align: center;
-  border: none;
   justify-content: space-between;
   font-family: "Lucida Console", "Courier New", monospace;
-  margin-top: 20px;
-  margin-bottom: 20px;
 
   @media(max-width: 990px) {
     width: 50%;
@@ -25,12 +25,19 @@ export const ContentProduct = styled(Card)`
   }
 `;
 
-export const ImgProduct = styled(CardImg)`
-    width: 50%;
-    height: 60%;
-    
+export const InforProtuct = styled(CardBody)`
+  width: 70%;
+  height: auto;
+  flex: 1;
+`;
 
-`
+export const ImgProduct = styled(CardImg)`
+  width: 100%;
+  height: 200px; /* Altura fixa para a imagem */
+  object-fit: contain; /* Garante que a imagem se ajuste sem distorção */
+`;
+
+
 export const  BtnCar = styled(Button)`
     display: flex;
     align-items: center;
