@@ -1,6 +1,5 @@
-import CardBody from "react-bootstrap/esm/CardBody";
 import CardText from "react-bootstrap/esm/CardText";
-import { BtnCar, ContentProduct, ImgProduct, InforProtuct, PriceProduct, TitleProduct } from "./style";
+import { BtnCar, ContainerImg, ContentProduct, ImgProduct, InforProtuct, PriceProduct, TitleProduct } from "./style";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useState } from "react";
 import { MyAlert } from "../Alert/style";
@@ -20,7 +19,10 @@ const CardProducts = ({ products = [], addToCart }) => {
     <>
       {products.map((product) => (
         <ContentProduct key={product.id}>
-           <ImgProduct src={product.image} alt={product.nameProduct}/>
+          <ContainerImg>
+            <ImgProduct src={product.image} alt={product.nameProduct}/>
+          </ContainerImg>
+          
           <InforProtuct>
             <TitleProduct>{product.nameProduct}</TitleProduct>
             <CardText>{product.desc}</CardText>
