@@ -24,7 +24,7 @@ export const ModalCar = styled(Modal)`
 
   .modal-title {
     /* Estilização do titulo do modal */
-    font-size: 35px;
+    font-size: 25px;
     font-family: "Lucida Console", "Courier New", monospace;
     font-weight: bold;
     text-align: center;
@@ -38,7 +38,7 @@ export const ModalCar = styled(Modal)`
 
   .modal-body {
     /* Estilização do corpo do modal */
-    font-size: 20px;
+    font-size: 15px;
     @media (max-width: 875px) {
       font-size: 17px;
     }
@@ -182,6 +182,7 @@ export const PedidoInput = styled.input`
 
 export const MessageTaxa = styled.p`
   color: red;
+  font-size: 15px;
 `;
 
 export const InfoPedido = styled.p`

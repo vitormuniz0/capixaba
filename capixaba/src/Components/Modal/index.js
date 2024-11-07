@@ -168,7 +168,7 @@ const CustomModal = ({ show, handleClose, cart, removeFromCart }) => {
               <ContentCar>
                 <SubContainer>
                   <div key={index}>
-                    <h3>{product.nameProduct}</h3>
+                    <h4>{product.nameProduct}</h4>
                     <p>{product.desc}</p>
                     <p>R$ {product.price},00</p>
                   </div>
@@ -181,7 +181,7 @@ const CustomModal = ({ show, handleClose, cart, removeFromCart }) => {
               </ContentCar>
             ))
           )}
-          <h3>Total: R$ {totalPrice},00</h3>
+          <h4>Total: R$ {totalPrice},00</h4>
           {deliveryMethod === "Delivery" && (
             <MessageTaxa>
               *Consultar Taxa de Entrega Após Envio do Pedido*

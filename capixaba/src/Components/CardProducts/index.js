@@ -1,18 +1,75 @@
-import CardText from "react-bootstrap/esm/CardText";
-import { BtnCar, ContainerImg, ContentProduct, ImgProduct, InforProtuct, PriceProduct, TitleProduct } from "./style";
+import {
+  BodyModal,
+  BtnCar,
+  ContainerImg,
+  ContentProduct,
+  DescProduct,
+  ImgProduct,
+  InforProtuct,
+  InputModal,
+  LabelModal,
+  PriceObs,
+  PriceProduct,
+  QuantidadeButton,
+  QuantityButton,
+  QuantityContainer,
+  QunatidadeButton,
+  TitleModal,
+  TitleProduct,
+} from "./style";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useState } from "react";
 import { MyAlert } from "../Alert/style";
+import { Modal, ModalBody } from "react-bootstrap";
+import { Buttons, ModalCar } from "../Modal/style";
 
 const CardProducts = ({ products = [], addToCart }) => {
   const [showAlert, setShowAlert] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+  const [observation, setObservation] = useState("");
 
   const handleNotification = (productName) => {
     setShowAlert(productName);
-
     setTimeout(() => {
       setShowAlert(false);
     }, 3000);
+  };
+
+  // funcao que abre o modal de observacao
+  const openModal = (product) => {
+    setSelectedProduct(product);
+    setModalIsOpen(true);
+  };
+
+  // funcao que fecha o modal de observacao
+  const closeModal = () => {
+    setModalIsOpen(false);
+    setQuantity(1);
+    setObservation("");
+  };
+
+  // Função para adicionar ao carrinho com quantidade e observação
+  const handleAddToCart = () => {
+    const productWithDetails = {
+      ...selectedProduct,
+      quantity,
+      observation,
+    };
+    addToCart(productWithDetails);
+    handleNotification(selectedProduct.nameProduct);
+    closeModal();
+  };
+
+  const handleIncrement = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  const handleDecrement = () => {
+    if (quantity > 1) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
+    }
   };
 
   return (
@@ -20,19 +77,13 @@ const CardProducts = ({ products = [], addToCart }) => {
       {products.map((product) => (
         <ContentProduct key={product.id}>
           <ContainerImg>
-            <ImgProduct src={product.image} alt={product.nameProduct}/>
+            <ImgProduct src={product.image} alt={product.nameProduct} />
           </ContainerImg>
-          
           <InforProtuct>
             <TitleProduct>{product.nameProduct}</TitleProduct>
-            <CardText>{product.desc}</CardText>
+            <DescProduct>{product.desc}</DescProduct>
             <PriceProduct>{product.price},00 R$</PriceProduct>
-            <BtnCar
-              onClick={() => {
-                addToCart(product);
-                handleNotification(product.nameProduct);
-              }}
-            >
+            <BtnCar onClick={() => openModal(product)}>
               <AiOutlineShoppingCart />
               {showAlert === product.nameProduct && (
                 <MyAlert variant="success">
@@ -43,6 +94,40 @@ const CardProducts = ({ products = [], addToCart }) => {
           </InforProtuct>
         </ContentProduct>
       ))}
+
+      {/* Se o selecionar o produto vai abrir este modal */}
+
+      {selectedProduct && (
+        <ModalCar show={modalIsOpen} onHide={closeModal}>
+          <ModalCar.Header>
+            <ModalCar.Title>{selectedProduct?.nameProduct}</ModalCar.Title>
+          </ModalCar.Header>
+          <BodyModal>
+            <PriceObs>R${selectedProduct.price},00</PriceObs>
+            <LabelModal>Quantidade:</LabelModal>
+            <QuantityContainer>
+              <QuantityButton onClick={handleDecrement}>-</QuantityButton>
+              <InputModal
+                type="number"
+                value={quantity}
+                min="1"
+                onChange={(e) => setQuantity(Number(e.target.value))}
+              />
+              <QuantityButton onClick={handleIncrement} isIncrement>+</QuantityButton>
+            </QuantityContainer>
+
+            <LabelModal>Observações:</LabelModal>
+            <textarea
+              value={observation}
+              onChange={(e) => setObservation(e.target.value)}
+            />
+          </BodyModal>
+          <ModalCar.Footer>
+            <Buttons onClick={handleAddToCart}>Adicionar ao Carrinho</Buttons>
+            <Buttons onClick={closeModal}>Fechar</Buttons>
+          </ModalCar.Footer>
+        </ModalCar>
+      )}
     </>
   );
 };
