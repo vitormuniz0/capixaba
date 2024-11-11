@@ -21,13 +21,16 @@ import { BsFillTrash3Fill } from "react-icons/bs";
 import { useState } from "react";
 import { ModalTitle } from "react-bootstrap";
 
-const CustomModal = ({ show, handleClose, cart, removeFromCart }) => {
+const CustomModal = ({ show, handleClose, cart, removeFromCart, setCart }) => {
   const [deliveryMethod, setDeliveryMethod] = useState("Retirada");
   const [showSecondModal, setShowSecundModal] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   //Funcao para fazer a soma dos precos dos produtos
-  const totalPrice = cart.reduce((total, product) => total + product.price, 0);
+  const totalPrice = cart.reduce(
+    (total, product) => total + product.price * product.quantity,
+    0
+  );
 
   //const que armazena os dados do cliente na hora da compra
   const [clientInfo, setClientInfo] = useState({
@@ -97,38 +100,41 @@ const CustomModal = ({ show, handleClose, cart, removeFromCart }) => {
         message += `*Nome:* ${clientInfo.name}\n`;
         message += `*Telefone:* ${clientInfo.phone}\n`;
         message += `*Método de Entrega:* ${deliveryMethod}\n`;
-      
+
         if (deliveryMethod === "Delivery") {
           message += `\n*Endereço:*\n`;
           message += `${clientInfo.street}, ${clientInfo.number}\n`;
           message += `${clientInfo.neighborhood} - ${clientInfo.complement}\n`;
         }
-      
+
         message += `\n*Produtos:*\n`;
         cart.forEach((product) => {
           message += `- *Produto:* ${product.nameProduct}\n`;
-          message += `  *Descrição:* ${product.desc}\n`;
-          message += `  *Preço:* R$ ${product.price},00\n`;
+          message += `  *Quantidade:* ${product.quantity}\n`; // Inclui a quantidade
+          message += `  *Observação:* ${product.observation || ""}\n`;
+          message += `  *Preço:* R$ ${product.price * product.quantity},00\n`;
         });
-      
+
         message += `\n*Total:* R$ ${totalPrice},00\n`;
-      
+
         if (deliveryMethod === "Delivery") {
           message += `\n*Consultar Taxa de Entrega De Acordo com o Endereço do Cliente.*\n`;
         }
-      
+
         return encodeURIComponent(message); // Encode the message to be URL-safe
       };
-      
+
       const whatsappNumber = "5581996804847"; // Substitua pelo número da empresa no formato internacional
       const whatsappLink = `https://wa.me/${whatsappNumber}?text=${formatMessage()}`;
-      
+
       // Abrir o link do WhatsApp
       window.open(whatsappLink, "_blank");
-      alert('Seu Pedido Foi Enviado Com Sucesso, Muito Obrigado!');
+      alert("Seu Pedido Foi Enviado Com Sucesso, Muito Obrigado!");
       setShowConfirmationModal(false);
-    } catch (error) { 
-      alert('Erro ao Enviar Pedido! ', error)
+      setCart([]); 
+    } catch (error) {
+      console.log("Error ", error);
+      alert("Erro ao Enviar Pedido! ", error);
     }
   };
 
@@ -168,9 +174,11 @@ const CustomModal = ({ show, handleClose, cart, removeFromCart }) => {
               <ContentCar>
                 <SubContainer>
                   <div key={index}>
-                    <h4>{product.nameProduct}</h4>
-                    <p>{product.desc}</p>
-                    <p>R$ {product.price},00</p>
+                    <h4>
+                      {product.quantity} x {product.nameProduct}
+                    </h4>
+                    <p>{product.observation}</p>
+                    <p>R$ {product.price * product.quantity},00</p>
                   </div>
                 </SubContainer>
                 <ContainerButton>
@@ -316,7 +324,8 @@ const CustomModal = ({ show, handleClose, cart, removeFromCart }) => {
           {cart.map((product, index) => (
             <div key={index}>
               <InfoPedido>
-                {product.nameProduct} - R$ {product.price},00
+                {product.quantity} x {product.nameProduct} - R${" "}
+                {product.price * product.quantity},00
               </InfoPedido>
             </div>
           ))}

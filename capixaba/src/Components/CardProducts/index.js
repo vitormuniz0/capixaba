@@ -7,20 +7,17 @@ import {
   ImgProduct,
   InforProtuct,
   InputModal,
+  InputText,
   LabelModal,
   PriceObs,
   PriceProduct,
-  QuantidadeButton,
   QuantityButton,
   QuantityContainer,
-  QunatidadeButton,
-  TitleModal,
   TitleProduct,
 } from "./style";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useState } from "react";
 import { MyAlert } from "../Alert/style";
-import { Modal, ModalBody } from "react-bootstrap";
 import { Buttons, ModalCar } from "../Modal/style";
 
 const CardProducts = ({ products = [], addToCart }) => {
@@ -99,7 +96,7 @@ const CardProducts = ({ products = [], addToCart }) => {
 
       {selectedProduct && (
         <ModalCar show={modalIsOpen} onHide={closeModal}>
-          <ModalCar.Header>
+          <ModalCar.Header closeButton onHide={closeModal}>
             <ModalCar.Title>{selectedProduct?.nameProduct}</ModalCar.Title>
           </ModalCar.Header>
           <BodyModal>
@@ -113,18 +110,20 @@ const CardProducts = ({ products = [], addToCart }) => {
                 min="1"
                 onChange={(e) => setQuantity(Number(e.target.value))}
               />
-              <QuantityButton onClick={handleIncrement} isIncrement>+</QuantityButton>
+              <QuantityButton onClick={handleIncrement} isIncrement>
+                +
+              </QuantityButton>
             </QuantityContainer>
 
             <LabelModal>Observações:</LabelModal>
-            <textarea
+            <InputText
               value={observation}
               onChange={(e) => setObservation(e.target.value)}
+              rows="4" 
             />
           </BodyModal>
           <ModalCar.Footer>
             <Buttons onClick={handleAddToCart}>Adicionar ao Carrinho</Buttons>
-            <Buttons onClick={closeModal}>Fechar</Buttons>
           </ModalCar.Footer>
         </ModalCar>
       )}

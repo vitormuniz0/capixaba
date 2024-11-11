@@ -155,6 +155,10 @@ export const InputModal = styled.input`
   @media (max-width:515px){
     width: 150px;
   }
-
-
+`
+export const InputText = styled.textarea`
+  width: 60%;
+  align-items: center;
+  display: flex;
+  margin: auto;
 `

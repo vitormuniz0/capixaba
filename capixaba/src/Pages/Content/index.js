@@ -211,7 +211,7 @@ const Content = () => {
           <CardProducts />
         </Section> */}
       </BodyContent>
-      <Footer cart={cart} removeFromCart={removeFromCart} />
+      <Footer cart={cart} setCart={setCart} removeFromCart={removeFromCart} />
     </Container>
   );
 };
