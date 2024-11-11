@@ -122,7 +122,7 @@ export const Buttons = styled(Button)`
   width: 25%;
 
   @media (max-width: 510px) {
-    width: 30%;
+    width: 50%;
   }
 
   @media (max-width: 390px) {
@@ -205,7 +205,7 @@ export const ButtonConfirm = styled(Button)`
   width: 25%;
 
   @media (max-width: 510px) {
-    width: 40%;
+    width: 50%;
   }
 
   @media (max-width: 390px) {

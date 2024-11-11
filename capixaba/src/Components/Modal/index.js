@@ -92,6 +92,11 @@ const CustomModal = ({ show, handleClose, cart, removeFromCart, setCart }) => {
     setShowSecundModal(false);
   };
 
+  const handleCloseLastModal = () =>{
+    resetClientInfo();
+    setShowConfirmationModal(false);
+  }
+
   // funcao para enviar o pedido para a empresa com as descricoes do pedido e fechar o modal no final
   const handleCloseConfirmationModal = () => {
     try {
@@ -250,21 +255,12 @@ const CustomModal = ({ show, handleClose, cart, removeFromCart, setCart }) => {
           <Buttons variant="primary" onClick={hadleAdvance}>
             Avancar
           </Buttons>
-          <Buttons
-            variant="secondary"
-            onClick={() => {
-              resetClientInfo();
-              handleClose();
-            }}
-          >
-            Fechar
-          </Buttons>
         </ModalCar.Footer>
       </ModalCar>
 
       {/* Segundo Modal - ADD Informações do Cliente */}
       <ModalCar show={showSecondModal} onHide={handleCloseSecondModal}>
-        <ModalCar.Header>
+        <ModalCar.Header closeButton>
           <ModalTitle>Confirmar Pedido</ModalTitle>
         </ModalCar.Header>
         <ModalCar.Body>
@@ -299,9 +295,9 @@ const CustomModal = ({ show, handleClose, cart, removeFromCart, setCart }) => {
       {/* Terceiro Modal - Confirmar Pedido */}
       <ModalCar
         show={showConfirmationModal}
-        onHide={handleCloseConfirmationModal}
+        onHide={handleCloseLastModal}
       >
-        <ModalCar.Header>
+        <ModalCar.Header closeButton>
           <ModalTitle>Resumo Do Pedido</ModalTitle>
         </ModalCar.Header>
         <ModalCar.Body>
