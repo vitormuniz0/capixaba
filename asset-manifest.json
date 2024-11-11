@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/capixaba/static/js/main.2d0f286f.js",
+    "main.js": "/capixaba/static/js/main.54e22db6.js",
     "static/media/esfiha.jpeg": "/capixaba/static/media/esfiha.1a40687f42fef98d1218.jpeg",
     "static/media/backgroundPadaria.jpg": "/capixaba/static/media/backgroundPadaria.4d87b2559998f9f6372d.jpg",
     "static/media/pastel.png": "/capixaba/static/media/pastel.818b01a1029495173bf4.png",
@@ -13,9 +13,9 @@
     "static/media/beijinho.jpg": "/capixaba/static/media/beijinho.8f199e085c20ff7cbd82.jpg",
     "static/media/quindim.png": "/capixaba/static/media/quindim.8bdbbf7870f3aa124826.png",
     "index.html": "/capixaba/index.html",
-    "main.2d0f286f.js.map": "/capixaba/static/js/main.2d0f286f.js.map"
+    "main.54e22db6.js.map": "/capixaba/static/js/main.54e22db6.js.map"
   },
   "entrypoints": [
-    "static/js/main.2d0f286f.js"
+    "static/js/main.54e22db6.js"
   ]
 }
