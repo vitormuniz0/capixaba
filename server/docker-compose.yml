@@ -1,0 +1,11 @@
+services:
+  app: 
+    build: .
+    image: server-capixaba
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/usr/src/app
+    env_file:
+      - .env 
+    restart: always
