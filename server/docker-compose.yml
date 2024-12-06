@@ -3,7 +3,7 @@ services:
     build: .
     image: server-capixaba
     ports:
-      - "4000:4000"
+      - "3000:3000"
     volumes:
       - .:/usr/src/app
     env_file:
