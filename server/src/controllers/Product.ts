@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { AdminService } from "../services/AdminService";
 
-export class AdminController {
-  createAdmin = (req: Request, res: Response) => {
+export class ProductController {
+  createProduct = (req: Request, res: Response) => {
     const adminService = new AdminService();
     const { email, password } = req.body;
 

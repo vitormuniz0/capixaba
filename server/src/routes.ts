@@ -1,7 +1,7 @@
 import { Router } from "express"
-import { AdminController } from "./controllers/Admin";
+import { ProductController } from "./controllers/Product";
 
 export const router = Router();
-const adminController = new AdminController();
+const adminController = new ProductController();
 
-router.post('/admin', adminController.createAdmin)
+router.post('/admin', adminController.createProduct)
