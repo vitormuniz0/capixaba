@@ -1,5 +1,7 @@
+version: '3.8'
+
 services:
-  app: 
+  app:
     build: .
     image: server-capixaba
     ports:
@@ -7,5 +9,23 @@ services:
     volumes:
       - .:/usr/src/app
     env_file:
-      - .env 
+      - .env
     restart: always
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:latest
+    container_name: data_postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+  
+volumes:
+  postgres_data: {}
