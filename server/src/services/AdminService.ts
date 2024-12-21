@@ -1,17 +1,11 @@
-const db = [
-    {
-        email:"Vitormuniz@gmail.com",
-        password:"542030"
-    }
-]
+import { ModelStatic } from "sequelize";
+import Admin from "../database/models/Admin";
 
-export class AdminService {
-    createAdmin = (email:string, password: string) => {
-        const admin = {
-            email,
-            password
-        }
-        db.push(admin)
-        console.log("DB Atualizado")
+class AdminService {
+    private model: ModelStatic<Admin> = Admin;
+    async get(){
+        const admins = await this.model.findAll()
     }
 }
+
+export default AdminService;

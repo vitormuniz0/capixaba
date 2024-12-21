@@ -1,31 +1,44 @@
-version: '3.8'
 
 services:
-  app:
-    build: .
-    image: server-capixaba
-    ports:
-      - "3000:3000"
-    volumes:
-      - .:/usr/src/app
-    env_file:
-      - .env
-    restart: always
-    depends_on:
-      - postgres
   postgres:
-    image: postgres:latest
-    container_name: data_postgres
+    image: postgres
+    container_name: postgres
     ports:
       - "5433:5432"
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_DB: ${DB_NAME}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     restart: always
-  
+  app:
+    build: .
+    container_name: server
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: 5432
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+      JWT_SECRET: EGFUJN45U6WKSEFNSLKDGNSIT5W6
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/server-capixaba
+    env_file:
+      - .env
+    restart: always
+    depends_on:
+      - postgres
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
 volumes:
   postgres_data: {}
