@@ -1,5 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import db from "."; // Certifique-se de que o arquivo `db` exporta sua instância do Sequelize
+import db from ".";
 
 class Products extends Model {
   declare id: number;
