@@ -18,18 +18,20 @@ export class ProductController {
 
   createProduct = async (req: Request, res: Response) => {
     try {
-      const { id_adm, name, img, description, price } = req.body;
+      const { id_adm, name,description, price } = req.body;
 
-      if (!id_adm || !name || !img || !description || !price) {
+      if (!id_adm || !name || !description || !price || !req.file) {
         return res
           .status(400)
-          .json({ error: "Todos os Campos são Obrigatórios!" });
+          .json({ error: "Todos os campos e a imagem são obrigatórios!" });
       }
+
+      const imgPath = `/uploads/${req.file.filename}`;
 
       const newProduct = await this.service.newProducts({
         id_adm,
         name,
-        img,
+        img: imgPath,
         description,
         price,
       });
@@ -61,16 +63,22 @@ export class ProductController {
   updateProduct = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
+      const { name, description, price } = req.body;
 
       if (!id || isNaN(Number(id))) {
         return res.status(400).json({ error: "ID inválido ou não fornecido" });
       }
 
-      const updatedData = req.body;
+      const updateData: any = { name, description, price };
+
+      if (req.file) {
+        updateData.img = `/uploads/${req.file.filename}`;
+      }
+
       const updatedProduct = await this.service.updateProducts(
-        Number(id),
-        updatedData
-      );
+      Number(id),
+      updateData
+    );
 
       return res.status(200).json(updatedProduct);
     } catch (error) {

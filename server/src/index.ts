@@ -1,10 +1,12 @@
 import 'dotenv/config'
 import express, { Request, Response } from "express";
 import { router } from "./Routes/routes";
+import path from "path";
 
 const server = express();
 server.use(express.json());
 server.use(router);
+server.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 
 server.get("/", (req: Request, res: Response) => {
