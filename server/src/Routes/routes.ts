@@ -9,5 +9,5 @@ const productController = new ProductController();
 router.get('/product', productController.getAllProducts);
 router.post("/product", upload.single("image"), productController.createProduct);
 router.delete('/product/:id', productController.deleteProduct);
-router.put("/product/:id",upload.single("image"),productController.updateProduct);
+router.put("/product/:id", upload.single("image"), productController.updateProduct);
 

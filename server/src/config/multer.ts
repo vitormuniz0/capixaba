@@ -7,23 +7,19 @@ if (!fs.existsSync(uploadPath)) {
     fs.mkdirSync(uploadPath, { recursive: true });
 }
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        const dir = path.join(__dirname, '../../uploads');
-        console.log("Diretório destino:", dir);
-        cb(null, dir);
-    },
-    filename: (req, file, cb) => {
-        const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-        cb(null, `${uniqueSuffix}-${file.originalname}`);
+const storage = multer.memoryStorage();
+
+const upload = multer({
+    storage,
+    fileFilter: (req, file, cb) => {
+        const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+  
+        if (!allowedTypes.includes(file.mimetype)) {
+            return cb(new Error("Tipo de arquivo não suportado") as any, false);
+        }
+        
+        cb(null, true);
     },
 });
 
-
-
-console.log("Caminho base (__dirname):", __dirname);
-console.log("Caminho final (uploadPath):", uploadPath);
-
-
-const uploadMulter = multer({ storage });
-export default uploadMulter;
+export default upload;
