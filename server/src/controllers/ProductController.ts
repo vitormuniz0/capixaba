@@ -89,62 +89,40 @@ export class ProductController {
     }
 
     try {
-      // Verifica se o administrador existe
       const adminExists = await Admin.findByPk(id_adm);
       if (!adminExists) {
         return res.status(404).json({ error: "Administrador não encontrado!" });
       }
 
-      // Verifica se o produto existe
       const product = await Products.findByPk(Number(id));
       if (!product) {
         return res.status(404).json({ error: "Produto não encontrado!" });
       }
 
-      // Processamento do arquivo de imagem (se houver)
-      upload.single("image")(req, res, async (err) => {
-        if (err) {
-          return res.status(400).json({ error: err.message });
-        }
+      let imgPath = product.img;
+      if (req.file) {
+        const uploadPath = path.join(__dirname, "../../uploads");
+        const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+        const filename = `${uniqueSuffix}-${req.file.originalname}`;
+        const filePath = path.join(uploadPath, filename);
 
-        let imgPath = product.img; // Mantém a imagem atual se não houver um novo arquivo
+        fs.writeFileSync(filePath, req.file.buffer);
 
-        if (req.file) {
-          // Se houver um novo arquivo, processamos o upload da imagem
-          const uploadPath = path.join(__dirname, "../../uploads");
-          const uniqueSuffix = `${Date.now()}-${Math.round(
-            Math.random() * 1e9
-          )}`;
-          const filename = `${uniqueSuffix}-${req.file.originalname}`;
-          const filePath = path.join(uploadPath, filename);
+        imgPath = `/uploads/${filename}`;
+      }
 
-          fs.writeFileSync(filePath, req.file.buffer);
-
-          imgPath = `/uploads/${filename}`; // Atualiza o caminho da imagem
-        }
-
-        // Atualiza o produto com os novos dados
-        try {
-          const updatedProduct = await Products.update(
-            {
-              id_adm,
-              name,
-              description,
-              price,
-              img: imgPath, // Atualiza a imagem (ou mantém a atual)
-            },
-            { where: { id: Number(id) } }
-          );
-
-          return res.status(200).json(updatedProduct);
-        } catch (updateError) {
-          console.error(updateError);
-          return res.status(500).json({ error: "Erro ao atualizar o produto" });
-        }
+      await product.update({
+        id_adm,
+        name,
+        description,
+        price,
+        img: imgPath,
       });
+
+      return res.status(200).json(product);
     } catch (error) {
       console.error(error);
-      return res.status(500).json({ error: "Erro inesperado" });
+      return res.status(500).json({ error: "Erro ao atualizar o produto" });
     }
   };
 }

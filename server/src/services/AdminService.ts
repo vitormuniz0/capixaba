@@ -3,9 +3,12 @@ import Admin from "../database/models/Admin";
 
 class AdminService {
     private model: ModelStatic<Admin> = Admin;
-    async get(){
-        const admins = await this.model.findAll()
+    
+    async newAdmin(data: {name: string, email:string, password: string}) {
+        const admin = await this.model.create(data);
+        return admin.get()
     }
+
 }
 
 export default AdminService;
