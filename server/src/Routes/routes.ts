@@ -18,3 +18,5 @@ router.put("/product/:id", upload.single("image"), productController.updateProdu
 // admins routes
 
 router.post('/admins', adminController.createAdmin)
+router.post('/auth', adminController.authAdmin)
+router.get('/admin/:id',adminController.checkToken, adminController.getAdmin)
