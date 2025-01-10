@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   backend:
     build:
@@ -22,6 +20,8 @@ services:
     depends_on:
       - postgres
     restart: always
+    networks:
+      - web-net
 
   frontend:
     build:
@@ -37,6 +37,10 @@ services:
     restart: always
     environment:
       - HOST=0.0.0.0
+    networks:
+      - web-net
+    depends_on:
+      - backend
 
   postgres:
     image: postgres
@@ -50,6 +54,8 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: always
+    networks:
+      - web-net
 
   pgadmin:
     image: dpage/pgadmin4
@@ -62,6 +68,11 @@ services:
     depends_on:
       - postgres
     restart: always
+    networks:
+      - web-net
 
 volumes:
   postgres_data: {}
+networks:
+  web-net:
+    name: web-net

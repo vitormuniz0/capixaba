@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.js": "/capixaba/static/js/main.e5704377.js",
+    "static/media/esfiha.jpeg": "/capixaba/static/media/esfiha.1a40687f42fef98d1218.jpeg",
+    "static/media/backgroundPadaria.jpg": "/capixaba/static/media/backgroundPadaria.4d87b2559998f9f6372d.jpg",
+    "static/media/pastel.png": "/capixaba/static/media/pastel.818b01a1029495173bf4.png",
+    "static/media/churros.png": "/capixaba/static/media/churros.89c0d3ce9145206c1b61.png",
+    "static/media/hamburguer.jpg": "/capixaba/static/media/hamburguer.bbf9a0fcedaab9443582.jpg",
+    "static/media/logoCapixaba.jpg": "/capixaba/static/media/logoCapixaba.a9ce59bb124bd58437d4.jpg",
+    "static/media/quibe.jpg": "/capixaba/static/media/quibe.13b97ba8f7533d7f656d.jpg",
+    "static/media/EMPADA-DE-FRANGO.jpg": "/capixaba/static/media/EMPADA-DE-FRANGO.f2c1ac2f425647f68d53.jpg",
+    "static/media/bolo-cenoura.jpg": "/capixaba/static/media/bolo-cenoura.9a622b7cdcd67b307608.jpg",
+    "static/media/beijinho.jpg": "/capixaba/static/media/beijinho.8f199e085c20ff7cbd82.jpg",
+    "static/media/quindim.png": "/capixaba/static/media/quindim.8bdbbf7870f3aa124826.png",
+    "index.html": "/capixaba/index.html",
+    "main.e5704377.js.map": "/capixaba/static/js/main.e5704377.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.e5704377.js"
+  ]
+}
