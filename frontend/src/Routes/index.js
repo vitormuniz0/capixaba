@@ -4,10 +4,11 @@ import Content from "../Pages/Content";
 
 const RoutesAplication = () => {
     return(
-        <BrowserRouter basename="/capixaba">
+        <BrowserRouter >
             <Routes>
-                <Route path="/" element={<Home/>}/>
+                <Route exact path="/" element={<Home/>}/>
                 <Route path="/content" element={<Content/>}/>
+                <Route render={() => <h1>NotFound</h1>}></Route>
             </Routes>
         </BrowserRouter>
     )

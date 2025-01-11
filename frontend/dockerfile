@@ -1,20 +1,31 @@
 
+# Etapa de construção
 FROM node:18 AS build
 
 WORKDIR /app
 
+# Copia os arquivos de configuração do npm
 COPY package*.json ./
 
+# Instala as dependências
 RUN npm install
 
+# Copia o restante dos arquivos da aplicação
 COPY . .
 
+# Cria a versão de produção da aplicação
 RUN npm run build
 
-FROM nginx:alpine
+# Etapa de execução
+FROM node:18
 
-COPY --from=build /app/build /usr/share/nginx/html
+WORKDIR /app
 
-EXPOSE 80
+# Copia a pasta build da etapa de construção para a pasta atual
+COPY --from=build /app/build /app/build
 
-CMD ["nginx", "-g", "daemon off;"]
+# Expõe a porta que será usada pelo servidor
+EXPOSE 3000
+
+# Comando para iniciar o servidor usando um servidor estático com Express
+CMD ["npx", "serve", "-s", "build", "-l", "3000"]

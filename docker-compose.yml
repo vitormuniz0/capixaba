@@ -31,7 +31,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend:/frontend-capixaba
+      - ./frontend:/frontend-capixaba:ro
     env_file:
       - .env
     restart: always
