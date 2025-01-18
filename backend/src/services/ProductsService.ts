@@ -8,7 +8,7 @@ class ProductsService {
     const products = await this.model.findAll();
     return products.map((product) => product.get()); 
   }
-  async newProducts(data: {id_adm: number; name: string; img: string; description:string; price: number}) {
+  async newProducts(data: {id_adm: number; name: string; img: string; description:string; type:string; price: number}) {
     const product = await this.model.create(data);
     return product.get(); 
   }

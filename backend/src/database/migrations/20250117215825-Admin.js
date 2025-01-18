@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up (queryInterface, Sequelize) {
     await queryInterface.createTable('admins', {
       id: {
         type: Sequelize.INTEGER,
@@ -17,9 +17,9 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,  // Garante que o e-mail será único
+        unique: true, // Garante que o e-mail seja único
         validate: {
-          isEmail: true,  // Valida que o formato do e-mail está correto
+          isEmail: true, // Valida o formato do e-mail
         },
       },
       password: {
@@ -29,7 +29,7 @@ module.exports = {
     });
   },
 
-  async down(queryInterface, Sequelize) {
+  async down (queryInterface, Sequelize) {
     await queryInterface.dropTable('admins');
-  },
+  }
 };

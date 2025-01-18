@@ -26,19 +26,22 @@ const Content = () => {
   const [cart, setCart] = useState([]);
   const [myProducts, setMyProducts] = useState([]);
 
-  const salgados = myProducts.filter((product) => product.tipo === "Salgados");
-  const doces = myProducts.filter((product) => product.tipo === "Doces");
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await api.get("/products");
-        setMyProducts(response.data);
+        const response = await api.get("/product");
+
+        // Verificar se a resposta foi bem-sucedida
+        if (response.status === 200) {
+          console.log("Resposta da API:", response.data);
+          setMyProducts(response.data);
+        } else {
+          console.log("Erro na requisição:", response.status);
+        }
       } catch (error) {
         console.error("Erro ao buscar produtos:", error);
       }
     };
-
     fetchProducts();
   }, []);
 
@@ -74,9 +77,13 @@ const Content = () => {
   };
 
   const filterProductsByCategory = (category) => {
-    return products.filter(
-      (product) => product.tipo.toLowerCase() === category
-    );
+    if (Array.isArray(myProducts)) {
+      return myProducts.filter(
+        (product) => product.type.toLowerCase() === category
+      );
+    }
+    console.error("Produtos não são um array:", myProducts);
+    return [];
   };
 
   return (
@@ -107,20 +114,20 @@ const Content = () => {
             addToCart={addToCart}
           />
         </Section>
-        <Section ref={sectionRefs.paes} id="paes">
+        {/* <Section ref={sectionRefs.paes} id="paes">
           <h2>Pães</h2>
           <CardProducts
             products={filterProductsByCategory("paes")}
             addToCart={addToCart}
           />
-        </Section>
-        <Section ref={sectionRefs.bebidas} id="bebidas">
+        </Section> */}
+        {/* <Section ref={sectionRefs.bebidas} id="bebidas">
           <h2>Bebidas</h2>
           <CardProducts
             products={filterProductsByCategory("bebidas")}
             addToCart={addToCart}
           />
-        </Section>
+        </Section> */}
       </BodyContent>
       <Footer cart={cart} setCart={setCart} removeFromCart={removeFromCart} />
     </Container>

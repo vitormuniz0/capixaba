@@ -8,7 +8,7 @@ const RoutesAplication = () => {
             <Routes>
                 <Route exact path="/" element={<Home/>}/>
                 <Route path="/content" element={<Content/>}/>
-                <Route render={() => <h1>NotFound</h1>}></Route>
+                <Route path="*" element={<h1>NotFound</h1>} />
             </Routes>
         </BrowserRouter>
     )

@@ -22,9 +22,9 @@ export class ProductController {
 
   createProduct = async (req: Request, res: Response) => {
     try {
-      const { id_adm, name, description, price } = req.body;
+      const { id_adm, name, description,type, price } = req.body;
 
-      if (!id_adm || !name || !description || !price || !req.file) {
+      if (!id_adm || !name || !description || !type || !price || !req.file) {
         return res
           .status(400)
           .json({ error: "Todos os campos e a imagem são obrigatórios!" });
@@ -47,6 +47,7 @@ export class ProductController {
         name,
         img: `/uploads/${filename}`,
         description,
+        type,
         price,
       });
       console.log("Produto Criado", newProduct);
@@ -76,7 +77,7 @@ export class ProductController {
 
   updateProduct = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { id_adm, name, description, price } = req.body;
+    const { id_adm, name, description, price, type } = req.body;
 
     if (!id || isNaN(Number(id))) {
       return res.status(400).json({ error: "ID inválido ou não fornecido" });
@@ -115,6 +116,7 @@ export class ProductController {
         id_adm,
         name,
         description,
+        type,
         price,
         img: imgPath,
       });

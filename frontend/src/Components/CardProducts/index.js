@@ -20,7 +20,7 @@ import { useState } from "react";
 import { MyAlert } from "../Alert/style";
 import { Buttons, ModalCar } from "../Modal/style";
 
-const CardProducts = ({ products = [], addToCart }) => {
+const CardProducts = ({ products , addToCart }) => {
   const [showAlert, setShowAlert] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -74,17 +74,17 @@ const CardProducts = ({ products = [], addToCart }) => {
       {products.map((product) => (
         <ContentProduct key={product.id}>
           <ContainerImg>
-            <ImgProduct src={product.image} alt={product.nameProduct} />
+            <ImgProduct src={`http://localhost:3001${product.img}`} alt={product.name} />
           </ContainerImg>
           <InforProtuct>
-            <TitleProduct>{product.nameProduct}</TitleProduct>
-            <DescProduct>{product.desc}</DescProduct>
+            <TitleProduct>{product.name}</TitleProduct>
+            <DescProduct>{product.description}</DescProduct>
             <PriceProduct>{product.price},00 R$</PriceProduct>
             <BtnCar onClick={() => openModal(product)}>
               <AiOutlineShoppingCart />
-              {showAlert === product.nameProduct && (
+              {showAlert === product.name && (
                 <MyAlert variant="success">
-                  {product.nameProduct} Adicionado com Sucesso!
+                  {product.name} Adicionado com Sucesso!
                 </MyAlert>
               )}
             </BtnCar>
@@ -97,7 +97,7 @@ const CardProducts = ({ products = [], addToCart }) => {
       {selectedProduct && (
         <ModalCar show={modalIsOpen} onHide={closeModal}>
           <ModalCar.Header closeButton onHide={closeModal}>
-            <ModalCar.Title>{selectedProduct?.nameProduct}</ModalCar.Title>
+            <ModalCar.Title>{selectedProduct?.name}</ModalCar.Title>
           </ModalCar.Header>
           <BodyModal>
             <PriceObs>R${selectedProduct.price},00</PriceObs>
