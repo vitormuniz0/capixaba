@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { FaInstagram } from "react-icons/fa6";
 import { FaWhatsapp } from "react-icons/fa";
 import { BsFillTelephoneFill } from "react-icons/bs";
+import { ImUserTie } from "react-icons/im";
 
 export const Container = styled.div`
   width: 100%;
@@ -104,3 +105,8 @@ export const Tell = styled(BsFillTelephoneFill)`
   margin-left: 30px;
   cursor: pointer;
 `;
+
+export const Adm = styled(ImUserTie)`
+  margin-left: 30px;
+  cursor: pointer;
+`

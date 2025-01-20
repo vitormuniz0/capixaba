@@ -1,40 +1,20 @@
 import React from "react";
 import { NavBarContainer, NavItem } from "./style";
 
-const NavBar = ({
-  scrollToSectionSalgados,
-  scrollToSectionDoces,
-  activeSection,
-  scrollToSectionPaes,
-  scrollToSectionBebidas,
-}) => {
+const NavBar = ({ scrollToSection, activeSection }) => {
+  const sections = ["salgados", "doces", "paes", "bebidas"];
+
   return (
     <NavBarContainer>
-      <NavItem
-        onClick={scrollToSectionSalgados}
-        isActive={activeSection === "salgados"}
-      >
-        Salgados
-      </NavItem>
-      <NavItem
-        onClick={scrollToSectionDoces}
-        isActive={activeSection === "doces"}
-      >
-        Doces
-      </NavItem>
-      <NavItem
-        onClick={scrollToSectionPaes}
-        isActive={activeSection === "paes"}
-      >
-        Pães
-      </NavItem>
-      <NavItem
-        onClick={scrollToSectionBebidas}
-        isActive={activeSection === "bebidas"}
-      >
-        Bebidas
-      </NavItem>
-      <NavItem>Promoção</NavItem>
+      {sections.map((section) => (
+        <NavItem
+          key={section}
+          onClick={() => scrollToSection(section)}
+          isActive={activeSection === section}
+        >
+          {section.charAt(0).toUpperCase() + section.slice(1)}
+        </NavItem>
+      ))}
     </NavBarContainer>
   );
 };

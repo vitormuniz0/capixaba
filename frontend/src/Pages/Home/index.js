@@ -1,9 +1,21 @@
 import React from "react";
-import { ButtonContent, Container, Content,Instagram,LogoContent, LogoImage, SocialContent, Tell, WhatsApp } from "./style";
+import { Adm, ButtonContent, Container, Content,Instagram,LogoContent, LogoImage, SocialContent, Tell, WhatsApp } from "./style";
 import MyButton from "./Button";
 import logo from '../../Assets/image/logoCapixaba.jpg'
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+
+  const navigate = useNavigate();
+
+  const handleClick = (onClick = null, to = null) => {
+    if (onClick) {
+      onClick();
+    } else if (to) {
+      navigate(to);
+    }
+  };
+
 
   const handleWhatsAppClick = () =>{
     const whatsappNumber = "5581996804847";
@@ -24,7 +36,7 @@ const Home = () => {
           <LogoImage src = {logo} alt='Logo'/>
         </LogoContent>
         <ButtonContent>
-          <MyButton to='/content'>Delivery Capixaba</MyButton>
+          <MyButton to='/content' onClick={handleClick}>Delivery Capixaba</MyButton>
           <MyButton>Ifood Capixaba</MyButton>
           <MyButton>Nossa Localização</MyButton>
           <MyButton onClick={handleWhatsAppClick}>Tire Suas Duvidas Aqui</MyButton>
@@ -32,9 +44,10 @@ const Home = () => {
             <WhatsApp onClick={handleWhatsAppClick}/>
             <Instagram onClick={handleInstagramClick}/>
             <Tell/>
+            <Adm onClick={() => navigate('/LoginAdmin')}/>
           </SocialContent>
         </ButtonContent>
-      </Content>
+      </Content>      
     </Container>
   );
 };

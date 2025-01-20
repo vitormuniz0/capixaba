@@ -95,20 +95,18 @@ const Content = () => {
       </Header>
       <NavBar
         scrollToSection={(category) =>
-          sectionRefs[category].current.scrollIntoView({ behavior: "smooth" })
+          sectionRefs[category]?.current?.scrollIntoView({ behavior: "smooth" })
         }
         activeSection={activeSection}
       />
       <BodyContent>
         <Section ref={sectionRefs.salgados} id="salgados">
-          <h2>Salgados</h2>
           <CardProducts
             products={filterProductsByCategory("salgados")}
             addToCart={addToCart}
           />
         </Section>
         <Section ref={sectionRefs.doces} id="doces">
-          <h2>Doces</h2>
           <CardProducts
             products={filterProductsByCategory("doces")}
             addToCart={addToCart}

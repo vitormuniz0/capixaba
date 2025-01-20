@@ -180,9 +180,9 @@ const CustomModal = ({ show, handleClose, cart, removeFromCart, setCart }) => {
                 <SubContainer>
                   <div key={index}>
                     <h4>
-                      {product.quantity} x {product.nameProduct}
+                      {product.quantity} x {product.name}
                     </h4>
-                    <p>{product.observation}</p>
+                    <p>{product.description}</p>
                     <p>R$ {product.price * product.quantity},00</p>
                   </div>
                 </SubContainer>
@@ -320,7 +320,7 @@ const CustomModal = ({ show, handleClose, cart, removeFromCart, setCart }) => {
           {cart.map((product, index) => (
             <div key={index}>
               <InfoPedido>
-                {product.quantity} x {product.nameProduct} - R${" "}
+                {product.quantity} x {product.name} - R${" "}
                 {product.price * product.quantity},00
               </InfoPedido>
             </div>
