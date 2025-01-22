@@ -8,14 +8,6 @@ const Home = () => {
 
   const navigate = useNavigate();
 
-  const handleClick = (onClick = null, to = null) => {
-    if (onClick) {
-      onClick();
-    } else if (to) {
-      navigate(to);
-    }
-  };
-
 
   const handleWhatsAppClick = () =>{
     const whatsappNumber = "5581996804847";
@@ -34,9 +26,9 @@ const Home = () => {
       <Content>
         <LogoContent>
           <LogoImage src = {logo} alt='Logo'/>
-        </LogoContent>
+        </LogoContent>  
         <ButtonContent>
-          <MyButton to='/content' onClick={handleClick}>Delivery Capixaba</MyButton>
+          <MyButton to='/content' >Delivery Capixaba</MyButton>
           <MyButton>Ifood Capixaba</MyButton>
           <MyButton>Nossa Localização</MyButton>
           <MyButton onClick={handleWhatsAppClick}>Tire Suas Duvidas Aqui</MyButton>
