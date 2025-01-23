@@ -6,9 +6,7 @@ import cors from "cors";
 
 
 const server = express();
-server.use(cors({
-  origin: 'http://localhost:3000'  
-}));
+server.use(cors());
 server.use(express.json());
 server.use(router);
 server.use("/uploads", express.static(path.join(__dirname, "../uploads")));

@@ -12,7 +12,7 @@ import MyHours from "./Hours";
 import NavBar from "../../Components/MenuScroll";
 import CardProducts from "../../Components/CardProducts";
 import Footer from "../../Components/Footer";
-import api from "../../Services/api";
+import api from "../../services/api";
 
 const Content = () => {
   const sectionRefs = {

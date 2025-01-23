@@ -12,7 +12,7 @@ export class AdminController {
   getAdmin = async (req: Request, res: Response) => {
     const id = req.params.id;
 
-    // Validando o formato do ID 
+    // Validando o formato do ID
     if (isNaN(Number(id))) {
       return res.status(400).json({ error: "ID inválido" });
     }
@@ -108,6 +108,9 @@ export class AdminController {
           .status(400)
           .json({ error: "Todos os campos e a imagem são obrigatórios!" });
       }
+
+      console.log("Email:", email);
+      console.log("Password:", password);
 
       // verificando se o adm existe
       const admin = await Admin.findOne({

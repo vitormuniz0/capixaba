@@ -1,42 +1,42 @@
 import { createContext, useEffect, useState } from "react";
-import api from "../Services/api";
+import api from "../services/api";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [admin, setAdmin] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadingStorageData = async () => {
       setLoading(true);
-      const storageUser = localStorage.getItem("@Auth:user");
+      const storageAdmin = localStorage.getItem("@Auth:admin");
       const storageToken = localStorage.getItem("@Auth:token");
 
-      if (storageUser && storageToken) {
+      if (storageAdmin && storageToken) {
         try {
-          const response = await api.get("/user", {
+          const response = await api.get(`/admin/${admin.id}`, {
             headers: {
               Authorization: `Bearer ${storageToken}`,
             },
           });
 
           if (response.status === 200) {
-            setUser(response.data);
+            setAdmin(response.data.admin);
           } else {
-            setUser(null);
+            setAdmin(null);
             localStorage.removeItem("@Auth:token");
-            localStorage.removeItem("@Auth:user");
+            localStorage.removeItem("@Auth:admin");
           }
         } catch (error) {
           console.error("Error loading user data:", error);
-          setUser(null);
+          setAdmin(null);
           localStorage.removeItem("@Auth:token");
-          localStorage.removeItem("@Auth:user");
+          localStorage.removeItem("@Auth:admin");
         }
       } else {
-        setUser(false);
+        setAdmin(false);
       }
       setLoading(false);
     };
@@ -49,47 +49,45 @@ export const AuthProvider = ({ children }) => {
         email,
         password,
       });
-  
+
       if (response.data.error) {
         alert(response.data.error);
       } else {
-        setUser(response.data.user);
+        setAdmin(response.data.admin);
         api.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${response.data.token}`;
         localStorage.setItem("@Auth:token", response.data.token);
-        localStorage.setItem("@Auth:user", JSON.stringify(response.data.user));
+        localStorage.setItem(
+          "@Auth:admin",
+          JSON.stringify(response.data.admin)
+        );
       }
     } catch (error) {
       console.error("Error during sign-in:", error);
+      if (error.response) {
+        console.error("Response error data:", error.response.data);
+      }
       setError(
         "Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente mais tarde."
       );
     }
   };
 
-  const userId = user?.id;
+  const adminId = admin?.id;
 
   return (
     <AuthContext.Provider
-  value={{
-    user,
-    signed: !!user,
-    loading,
-    signIn,
-    userId,
-    error,
-  }}
->
-  {console.log("AuthContext.Provider value:", {
-    user,
-    signed: !!user,
-    loading,
-    signIn,
-    userId,
-    error,
-  })}
-  {children}
-</AuthContext.Provider>
+      value={{
+        admin,
+        signed: !!admin,
+        loading,
+        signIn,
+        adminId,
+        error,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
   );
 };

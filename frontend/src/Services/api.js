@@ -1,10 +1,9 @@
 import axios from "axios";
 import 'dotenv/config'
 
-const baseURL = "http://localhost:3001";
 
 const api = axios.create({
-    baseURL,
+    baseURL:"http://localhost:3001",
 });
 
 async function testApiConnection() {

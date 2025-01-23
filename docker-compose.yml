@@ -31,7 +31,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend:/frontend-capixaba:ro
+      - ./frontend:/frontend-capixaba
     env_file:
       - .env
     restart: always
@@ -73,6 +73,7 @@ services:
 
 volumes:
   postgres_data: {}
+
 networks:
   web-net:
-    name: web-net
+    driver: bridge
