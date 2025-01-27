@@ -8,6 +8,8 @@ const LoginAdmin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { signIn, signed, loading } = useContext(AuthContext);
+  const [showError, setShowError] = useState(null); // Inicializando o estado
+  const [error, setError] = useState(null);
 
   if (!AuthContext) {
     throw new Error("AuthContext não inicializado corretamente");
@@ -23,6 +25,13 @@ const LoginAdmin = () => {
     }
   }, [signed]);
 
+  useEffect(() => {
+    if (error) {
+      setShowError(error); // Exibe o erro no alerta
+      setTimeout(() => setShowError(null), 3000); // Remove o alerta após 3 segundos
+    }
+  }, [error]);
+
   const handleSignIn = async (e) => {
     e.preventDefault();
 
@@ -30,9 +39,8 @@ const LoginAdmin = () => {
       alert("Por favor, preencha todos os campos.");
       return;
     }
-  
+
     const data = { email, password };
-    console.log("Sign-in data:", data);
     await signIn(data);
   };
 

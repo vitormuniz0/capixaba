@@ -5,85 +5,84 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [admin, setAdmin] = useState(null);
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  // Carrega dados do localStorage ao iniciar
   useEffect(() => {
-    const loadingStorageData = async () => {
+    const loadStorageData = async () => {
       setLoading(true);
+
       const storageAdmin = localStorage.getItem("@Auth:admin");
       const storageToken = localStorage.getItem("@Auth:token");
 
       if (storageAdmin && storageToken) {
         try {
-          const response = await api.get(`/admin/${admin.id}`, {
-            headers: {
-              Authorization: `Bearer ${storageToken}`,
-            },
-          });
+          // Configura o token no cabeçalho para futuras requisições
+          api.defaults.headers.common["Authorization"] = `Bearer ${storageToken}`;
+          
+          const parsedAdmin = JSON.parse(storageAdmin);
+          const response = await api.get(`/admin/${parsedAdmin.id}`);
 
           if (response.status === 200) {
             setAdmin(response.data.admin);
           } else {
-            setAdmin(null);
-            localStorage.removeItem("@Auth:token");
-            localStorage.removeItem("@Auth:admin");
+            logout(); // Limpa dados inválidos
           }
         } catch (error) {
-          console.error("Error loading user data:", error);
-          setAdmin(null);
-          localStorage.removeItem("@Auth:token");
-          localStorage.removeItem("@Auth:admin");
+          console.error("Erro ao carregar dados do admin:", error);
+          logout();
         }
       } else {
-        setAdmin(false);
+        setAdmin(null); // Usuário não autenticado
       }
+
       setLoading(false);
     };
-    loadingStorageData();
+
+    loadStorageData();
   }, []);
 
+  // Função de login
   const signIn = async ({ email, password }) => {
+    setError(null); // Limpa erros anteriores
+
     try {
-      const response = await api.post("/auth", {
-        email,
-        password,
-      });
+      const response = await api.post("/auth", { email, password });
 
       if (response.data.error) {
-        alert(response.data.error);
+        setError(response.data.error);
+        alert(response.data.error); // Mensagem de erro
       } else {
         setAdmin(response.data.admin);
-        api.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${response.data.token}`;
+        api.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
+
+        // Salva dados no localStorage
         localStorage.setItem("@Auth:token", response.data.token);
-        localStorage.setItem(
-          "@Auth:admin",
-          JSON.stringify(response.data.admin)
-        );
+        localStorage.setItem("@Auth:admin", JSON.stringify(response.data.admin));
       }
     } catch (error) {
-      console.error("Error during sign-in:", error);
-      if (error.response) {
-        console.error("Response error data:", error.response.data);
-      }
-      setError(
-        "Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente mais tarde."
-      );
+      console.error("Erro ao realizar login:", error);
+      setError("Erro ao realizar login. Tente novamente.");
     }
   };
 
-  const adminId = admin?.id;
+  // Função de logout
+  const logout = () => {
+    setAdmin(null);
+    localStorage.removeItem("@Auth:token");
+    localStorage.removeItem("@Auth:admin");
+    api.defaults.headers.common["Authorization"] = null;
+  };
 
   return (
     <AuthContext.Provider
       value={{
         admin,
-        signed: !!admin,
+        signed: !!admin, // true se admin for válido
         loading,
         signIn,
-        adminId,
+        logout,
         error,
       }}
     >

@@ -11,13 +11,16 @@ const RoutesAplication = () => {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/content" element={<Content />} />
-        <Route path="*" element={<h1>NotFound</h1>} />
         <Route path="/LoginAdmin" element={<LoginAdmin />} />
-        <Route path="/homeAdmin" element={<PrivateRoute />}>
+        {/* Rotas protegidas */}
+        <Route element={<PrivateRoute />}>
           <Route path="/homeAdmin" element={<HomeAdmin />} />
         </Route>
+        {/* Rota 404 */}
+        <Route path="*" element={<h1>404 - Página não encontrada</h1>} />
       </Routes>
     </BrowserRouter>
   );
 };
+
 export default RoutesAplication;

@@ -142,7 +142,7 @@ export class AdminController {
 
       res
         .status(200)
-        .json({ msg: "Autenticação realizada com sucesso!", token });
+        .json({ msg: "Autenticação realizada com sucesso!", token, admin });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ error: "Erro ao criar administrador" });
