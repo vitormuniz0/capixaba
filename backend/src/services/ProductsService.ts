@@ -4,6 +4,18 @@ import Products from "../database/models/Products";
 class ProductsService {
   private model: ModelStatic<Products> = Products;
 
+  async getProductsByAdmin(id_adm: number) {
+    try {
+      const products = await this.model.findAll({
+        where: { id_adm },
+      });
+      return products;
+    } catch (error) {
+      console.error("Erro ao buscar produtos no serviço:", error);
+      throw new Error("Erro ao buscar produtos.");
+    }
+  }
+
   async getProducts() {
     const products = await this.model.findAll();
     return products.map((product) => product.get()); 

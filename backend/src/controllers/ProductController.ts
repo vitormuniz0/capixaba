@@ -9,6 +9,39 @@ import upload from "../config/multer";
 export class ProductController {
   private service = new ProductsService();
 
+  getProductsByAdmin = async (req: Request, res: Response) => {
+    try {
+        const { id_adm } = req.params;
+
+        console.log(id_adm)
+
+        if (!id_adm || isNaN(Number(id_adm))) {
+          return res.status(400).json({ error: "ID inválido ou não fornecido" });
+        }
+
+        // Verifica se o administrador existe
+        const adminExists = await Admin.findByPk(id_adm);
+        if (!adminExists) {
+            return res.status(404).json({ error: "Administrador não encontrado!" });
+        }
+
+        // Chama o serviço para buscar os produtos
+        const products = await this.service.getProductsByAdmin(Number(id_adm));
+
+        // Verifica se algum produto foi encontrado
+        if (!products || products.length === 0) {
+            return res.status(404).json({ error: "Nenhum produto encontrado para este administrador." });
+        }
+
+        // Retorna os produtos encontrados
+        console.log("Buscar produtos para o adminId:", id_adm);
+        return res.status(200).json(products);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Erro ao obter os produtos" });
+    }
+};
+
   getAllProducts = async (req: Request, res: Response) => {
     try {
       const products = await this.service.getProducts();

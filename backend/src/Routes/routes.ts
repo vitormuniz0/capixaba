@@ -10,6 +10,7 @@ const adminController = new AdminController();
 
 //  products routes
 
+router.get("/product/:id", productController.getProductsByAdmin);
 router.get('/product', productController.getAllProducts);
 router.post("/product", upload.single("image"), productController.createProduct);
 router.delete('/product/:id', productController.deleteProduct);
