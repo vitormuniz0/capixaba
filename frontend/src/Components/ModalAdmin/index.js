@@ -3,9 +3,13 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { AuthContext } from "../../context/auth";
-import api from "../../services/api";
 
 const ModalAdmin = ({ show, handleClose, productToEdit, onSave }) => {
+  console.log("onSave recebido no ModalAdmin:", onSave); // Verifique se onSave é uma função
+
+  if (typeof onSave !== "function") {
+    console.error("Erro: onSave não é uma função!", onSave);
+  }
   const { admin } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     id: null,
@@ -20,7 +24,14 @@ const ModalAdmin = ({ show, handleClose, productToEdit, onSave }) => {
     if (productToEdit) {
       setFormData({ ...productToEdit, file: null });
     } else {
-      setFormData({ id: null, name: "", description: "", type: "", price: "", file: null });
+      setFormData({
+        id: null,
+        name: "",
+        description: "",
+        type: "",
+        price: "",
+        file: null,
+      });
     }
   }, [productToEdit]);
 
@@ -32,15 +43,22 @@ const ModalAdmin = ({ show, handleClose, productToEdit, onSave }) => {
   const handleFileChange = (e) => {
     setFormData((prev) => ({ ...prev, file: e.target.files[0] }));
   };
-
+ 
   const handleSave = () => {
-    onSave(formData);  // Chama a função onSave (passada pelo pai) para salvar o produto
+    if (typeof onSave === 'function') {
+      onSave({ name: 'Teste' }); // Dados de teste
+    } else {
+      console.error("onSave não é uma função!", onSave);
+    }
   };
+
 
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>{formData.id ? "Editar Produto" : "Adicionar Produto"}</Modal.Title>
+        <Modal.Title>
+          {formData.id ? "Editar Produto" : "Adicionar Produto"}
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form.Control
