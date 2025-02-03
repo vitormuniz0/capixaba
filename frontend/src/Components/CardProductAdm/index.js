@@ -7,7 +7,7 @@ import {
   PriceProduct,
   TitleProduct,
 } from "../CardProducts/style";
-import { ButtonAdm } from "./style";
+import { ButtonAdm, ContainerButtonAdm } from "./style";
 
 const CardProductsAdm = ({ products = [], onEdit, onDelete }) => {
   return (
@@ -25,10 +25,10 @@ const CardProductsAdm = ({ products = [], onEdit, onDelete }) => {
               <TitleProduct>{product.name}</TitleProduct>
               <DescProduct>{product.description}</DescProduct>
               <PriceProduct>{product.price},00 R$</PriceProduct>
-              <div>
+              <ContainerButtonAdm>
                 <ButtonAdm onClick={() => onEdit(product)}>Atualizar</ButtonAdm>
                 <ButtonAdm onClick={() => onDelete(product.id)}>Excluir</ButtonAdm>
-              </div>
+              </ContainerButtonAdm>
             </InforProtuct>
           </ContentProduct>
         ))

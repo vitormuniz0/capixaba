@@ -4,12 +4,9 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { AuthContext } from "../../context/auth";
 
-const ModalAdmin = ({ show, handleClose, productToEdit, onSave }) => {
-  console.log("onSave recebido no ModalAdmin:", onSave); // Verifique se onSave é uma função
 
-  if (typeof onSave !== "function") {
-    console.error("Erro: onSave não é uma função!", onSave);
-  }
+
+const ModalAdmin = ({ show, handleClose, productToEdit, onSave }) => {
   const { admin } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     id: null,
@@ -43,15 +40,14 @@ const ModalAdmin = ({ show, handleClose, productToEdit, onSave }) => {
   const handleFileChange = (e) => {
     setFormData((prev) => ({ ...prev, file: e.target.files[0] }));
   };
- 
+
   const handleSave = () => {
-    if (typeof onSave === 'function') {
-      onSave({ name: 'Teste' }); // Dados de teste
+    if (typeof onSave === "function") {
+      onSave(formData); // Envia os dados completos para o onSave
     } else {
       console.error("onSave não é uma função!", onSave);
     }
   };
-
 
   return (
     <Modal show={show} onHide={handleClose} centered>
@@ -105,5 +101,6 @@ const ModalAdmin = ({ show, handleClose, productToEdit, onSave }) => {
     </Modal>
   );
 };
+
 
 export default ModalAdmin;

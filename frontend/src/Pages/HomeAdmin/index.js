@@ -16,16 +16,9 @@ import { AuthContext } from "../../context/auth";
 import FooterAdmin from "../../Components/FooterAdmin";
 import ModalAdmin from "../../Components/ModalAdmin";
 
+
 const HomeAdmin = () => {
   const { admin } = useContext(AuthContext);
-  const sectionRefs = {
-    salgados: useRef(null),
-    doces: useRef(null),
-    paes: useRef(null),
-    bebidas: useRef(null),
-  };
-
-  const [activeSection, setActiveSection] = useState("");
   const [myProducts, setMyProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
@@ -34,10 +27,7 @@ const HomeAdmin = () => {
     try {
       if (!admin) return;
       const response = await api.get(`/product/?id_adm=${admin.id}`);
-
-      if (response.status === 200) {
-        setMyProducts(response.data || []);
-      }
+      setMyProducts(response.data || []);
     } catch (error) {
       console.error("Erro ao buscar produtos:", error);
     }
@@ -47,56 +37,68 @@ const HomeAdmin = () => {
     fetchProducts();
   }, [admin]);
 
-  const handleEditProduct = (product) => {
-    setProductToEdit(product);
-    setShowModal(true); // No need for setTimeout anymore
+  const handleUpdateProduct = async (productData) => {
+    try {
+      const formData = new FormData();
+      formData.append("id_adm", admin.id);
+      formData.append("name", productData.name);
+      formData.append("description", productData.description);
+      formData.append("type", productData.type);
+      formData.append("price", productData.price);
+      if (productData.file) {
+        formData.append("image", productData.file);
+      }
+
+      await api.put(`/product/${productData.id}`, formData);
+      setShowModal(false);
+      fetchProducts(); // Atualiza lista de produtos
+    } catch (error) {
+      console.error("Erro ao atualizar produto:", error);
+    }
   };
 
   const handleDeleteProduct = async (id) => {
     try {
       await api.delete(`/product/${id}`);
       alert("Produto excluído com sucesso!");
-      fetchProducts();
+      fetchProducts(); // Atualiza a lista
     } catch (error) {
       console.error("Erro ao excluir produto:", error);
       alert("Erro ao excluir produto.");
     }
   };
 
-  const handleAddOrUpdateProduct = async (formData) => {
+  const handleCreateProduct = async (productData) => {
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append("id_adm", admin.id);
-      formDataToSend.append("name", formData.name);
-      formDataToSend.append("description", formData.description);
-      formDataToSend.append("type", formData.type);
-      formDataToSend.append("price", formData.price);
-      if (formData.file) formDataToSend.append("image", formData.file);
-
-      if (formData.id) {
-        await api.put(`/product/${formData.id}`, formDataToSend);
-        alert("Produto atualizado com sucesso!");
-      } else {
-        await api.post("/product", formDataToSend);
-        alert("Produto criado com sucesso!");
+      const formData = new FormData();
+      formData.append("id_adm", admin.id);
+      formData.append("name", productData.name);
+      formData.append("description", productData.description);
+      formData.append("type", productData.type);
+      formData.append("price", productData.price);
+      if (productData.file) {
+        formData.append("image", productData.file);
       }
 
-      fetchProducts();
+      await api.post("/product", formData);
       setShowModal(false);
+      fetchProducts(); // Atualiza a lista
     } catch (error) {
-      console.error("Erro ao salvar produto:", error);
-      alert("Erro ao salvar produto.");
+      console.error("Erro ao criar produto:", error);
     }
   };
 
-  const handleSaveProduct = (formData) => {
-    console.log("handleSaveProduct chamado com formData:", formData);
+  const handleSaveProduct = (productData) => {
+    if (productData.id) {
+      handleUpdateProduct(productData);
+    } else {
+      handleCreateProduct(productData);
+    }
   };
 
-  const filterProductsByCategory = (category) => {
-    return myProducts
-      ? myProducts.filter((product) => product.type.toLowerCase() === category)
-      : [];
+  const handleEditProduct = (product) => {
+    setProductToEdit(product);
+    setShowModal(true);
   };
 
   return (
@@ -106,38 +108,28 @@ const HomeAdmin = () => {
         <Location>Avenida Capitão Casa | Número 00</Location>
         <MyHours />
       </Header>
-      <NavBar
-        scrollToSection={(category) =>
-          sectionRefs[category]?.current?.scrollIntoView({ behavior: "smooth" })
-        }
-        activeSection={activeSection}
-      />
+      <NavBar />
       <BodyContent>
-        <Section ref={sectionRefs.salgados} id="salgados">
+        <Section>
           <CardProductsAdm
-            products={filterProductsByCategory("salgados")}
-            onEdit={handleEditProduct}
-            onDelete={handleDeleteProduct}
-          />
-        </Section>
-        <Section ref={sectionRefs.doces} id="doces">
-          <CardProductsAdm
-            products={filterProductsByCategory("doces")}
+            products={myProducts}
             onEdit={handleEditProduct}
             onDelete={handleDeleteProduct}
           />
         </Section>
       </BodyContent>
-      <FooterAdmin />
-      {showModal && ( // Renderiza apenas se showModal for true
+      <FooterAdmin onAdd={() => setShowModal(true)} />
+      {showModal && (
         <ModalAdmin
+          key={productToEdit?.id || "new"}
           show={showModal}
           handleClose={() => setShowModal(false)}
           productToEdit={productToEdit}
-          onSave={handleSaveProduct}
+          onSave={handleSaveProduct} // Passando onSave para o ModalAdmin
         />
       )}
     </Container>
   );
 };
+
 export default HomeAdmin;

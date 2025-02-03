@@ -1,17 +1,9 @@
-import { useState } from "react";
 import { ContainerFooter, TextFooter } from "../Footer/style";
-import ModalAdmin from "../ModalAdmin";
 
-const FooterAdmin = () => {
-  const [showModal, setShowModal] = useState(false);
-
+const FooterAdmin = ({ onAdd }) => {
   return (
     <ContainerFooter>
-      <TextFooter onClick={() => setShowModal(true)}>Adicionar Produtos</TextFooter>
-      <ModalAdmin
-        show={showModal}
-        handleClose={() => setShowModal(false)}
-      />
+      <TextFooter onClick={onAdd}>Adicionar Produtos</TextFooter>
     </ContainerFooter>
   );
 };
